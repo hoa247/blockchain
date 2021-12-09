@@ -1,6 +1,5 @@
 const sha256 = require('crypto-js/sha256');
 
-
 let block = {
     block: 3,
     nonce: 1,
