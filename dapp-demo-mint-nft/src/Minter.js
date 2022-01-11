@@ -94,6 +94,17 @@ const Minter = (props) => {
       <p id="status">
         {status}
       </p>
+      <br></br>
+      <h1>List NFT:</h1>
+      <div className="card">
+        <img src="https://gateway.pinata.cloud/ipfs/QmYP7Nw5Zh2ZgkbNDox3tbT31hVh31L2gyV3wXap86ZMWW?preview=1" alt="Avatar"/>
+          <div className="container">
+            <h4><b>John Doe</b></h4>
+            <p>Architect & Engineer</p>
+          </div>
+      </div>
+
+
     </div>
   );
 };
