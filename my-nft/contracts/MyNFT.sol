@@ -10,6 +10,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract MyNFT is ERC721, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
+    mapping (address => uint256[]) private tokenIdsByOwners;
 
     constructor() public ERC721("MyNFT", "NFT") {}
 
@@ -22,7 +23,12 @@ contract MyNFT is ERC721, Ownable {
         uint256 newItemId = _tokenIds.current();
         _mint(recipient, newItemId);
         _setTokenURI(newItemId, tokenURI);
-
+        tokenIdsByOwners[recipient].push(newItemId);
         return newItemId;
+    }
+
+    function getTokenIdsByOwner(address recipient) public view returns (uint256[] memory)
+    {
+        return tokenIdsByOwners[recipient];
     }
 }

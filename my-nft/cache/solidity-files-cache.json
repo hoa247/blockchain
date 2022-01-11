@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/hoatd/my-data/other/blockchain/my-nft/contracts/MyNFT.sol": {
-      "lastModificationDate": 1641286859730,
-      "contentHash": "7f55c782d173bdc8a1e127a70cc0454c",
+      "lastModificationDate": 1641904849909,
+      "contentHash": "37bd0e31f7d4a1be8a543bd910c9ee0a",
       "sourceName": "contracts/MyNFT.sol",
       "solcConfig": {
         "version": "0.7.3",
