@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCurrentWalletConnected, connectWallet, mintNFT } from "./utils/interact.js";
+import { getCurrentWalletConnected, connectWallet, mintNFT, getNFTsByOwner } from "./utils/interact.js";
 
 const Minter = (props) => {
 
@@ -9,12 +9,17 @@ const Minter = (props) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [url, setURL] = useState("");
- 
+  const [NFTs, setNFTs] = useState("");
+
   useEffect(async () => { //TODO: implement
     const {address, status} = await getCurrentWalletConnected();
     setWallet(address)
     setStatus(status);
     addWalletListener();
+    if (address) {
+        const NFTsByOwner = await getNFTsByOwner(address)
+        setNFTs(NFTsByOwner)
+    }
   }, []);
 
   const connectWalletPressed = async () => { //TODO: implement
@@ -96,13 +101,19 @@ const Minter = (props) => {
       </p>
       <br></br>
       <h1>List NFT:</h1>
-      <div className="card">
-        <img src="https://gateway.pinata.cloud/ipfs/QmYP7Nw5Zh2ZgkbNDox3tbT31hVh31L2gyV3wXap86ZMWW?preview=1" alt="Avatar"/>
-          <div className="container">
-            <h4><b>John Doe</b></h4>
-            <p>Architect & Engineer</p>
-          </div>
-      </div>
+        {NFTs && NFTs.map(function (NFT, index, array) {
+            return (
+                <div className="card">
+                    <img src={NFT.image} alt="Avatar"/>
+                    <div className="container">
+                        <h4><b>{NFT.name}</b></h4>
+                        <p>{NFT.description}</p>
+                    </div>
+                </div>
+            )
+        })
+        }
+
 
 
     </div>

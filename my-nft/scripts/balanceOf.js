@@ -7,16 +7,16 @@ const nftContract = new web3.eth.Contract(contract.abi, CONTRACT_ADDRESS);
 
 
 async function balanceOf() {
-  NFTs = await nftContract.methods.getTokenIdsByOwner(PUBLIC_KEY).call();
+  NFTs = await nftContract.methods.getTokensByOwner(PUBLIC_KEY).call();
   // NFT = await nftContract.methods.tokenOfOwnerByIndex(PUBLIC_KEY, 1).call();
   // owner = await nftContract.methods.totalSupply().call();
 
-  uri = await nftContract.methods.tokenURI(1).call();
+  // uri = await nftContract.methods.tokenURI(1).call();
   console.log({
     NFTs,
     // NFT,
     // owner,
-    uri,
+    // uri,
   });
 }
 balanceOf()

@@ -1,6 +1,7 @@
 //Contract based on https://docs.openzeppelin.com/contracts/3.x/erc721
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.7.3;
+pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
@@ -10,7 +11,11 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract MyNFT is ERC721, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
-    mapping (address => uint256[]) private tokenIdsByOwners;
+    struct Token {
+        uint256 id;
+        string uri;
+    }
+    mapping (address => Token[]) private tokensByOwners;
 
     constructor() public ERC721("MyNFT", "NFT") {}
 
@@ -23,12 +28,12 @@ contract MyNFT is ERC721, Ownable {
         uint256 newItemId = _tokenIds.current();
         _mint(recipient, newItemId);
         _setTokenURI(newItemId, tokenURI);
-        tokenIdsByOwners[recipient].push(newItemId);
+        tokensByOwners[recipient].push(Token(newItemId, tokenURI));
         return newItemId;
     }
 
-    function getTokenIdsByOwner(address recipient) public view returns (uint256[] memory)
+    function getTokensByOwner(address recipient) public view returns (Token[] memory)
     {
-        return tokenIdsByOwners[recipient];
+        return tokensByOwners[recipient];
     }
 }
